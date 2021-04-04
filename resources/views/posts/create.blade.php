@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 <!-- CK Editor
-    I tried to use the updated version but it gave me an error, 
+    I tried to use the updated version but it gave me an error,
     so i download it manually and paste it in the public folder.
     Then, I used the js files from the layout, just like when you use the bootstrap js file,
-    in views/layouts/app.blade.php: 
+    in views/layouts/app.blade.php:
         <script src="/ckeditor/ckeditor.js"></script>
         <script>
             CKEDITOR.replace( 'article-ckeditor' );

@@ -63,7 +63,7 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 //-------------------------
 /*
 Try to make auth from the begining before anything,
-this will install the ui for auth and also vue.js: 
+this will install the ui for auth and also vue.js:
     composer require laravel/ui --dev
     php artisan ui vue --auth
 
@@ -90,10 +90,10 @@ this will install the ui for auth and also vue.js:
 //      php artisan make:model Post -m <<<"-m" to make a migration file>>>
 //
 // Also if you want to edit a column in a table of the DB, you can do it directly,
-// but as a best practise, you should do it using migration: 
+// but as a best practise, you should do it using migration:
 //      php artisan make:migration add_user_id_to_posts <<<better to be a descriptive name>>>
 //      php artisan make:migration add_cover_image_to_posts
-// Why <<<descriptive>>>? 
+// Why <<<descriptive>>>?
 // because laravel will understand you and will prepare the migration file as you describe!!
 //-----------------------------------------
 
@@ -112,7 +112,7 @@ this will install the ui for auth and also vue.js:
 /*
 //you can use Tinker, which is a laravel tool to insert data to database,
 //.. instead of entering it manually from mySql or from a form.
-//I already used it to enter the posts info using the following code in the terminal: 
+//I already used it to enter the posts info using the following code in the terminal:
 
 $ php artisan tinker
 Psy Shell v0.10.7 (PHP 7.3.2 — cli) by Justin Hileman
@@ -157,13 +157,13 @@ Psy Shell v0.10.7 (PHP 7.3.2 — cli) by Justin Hileman
 //-------------------------
 /*
 To use bootstrap and configure the UI in Laravel 8, do the following:
-    1- run on terminal (not on git bash of vs code): 
+    1- run on terminal (not on git bash of vs code):
         composer require laravel/ui
-    2- also: 
+    2- also:
         php artisan ui bootstrap
-    3- then: 
+    3- then:
         npm install
-    4- lastly:  
+    4- lastly:
         npm run dev
     GOT AN ERROR????? TRY THESE:
         run: composer install
@@ -180,3 +180,19 @@ and the compile it with the command "npm run dev"
 //      End of Laravel UI
 //-------------------------
 
+//-------------------------------------------
+//                  Email
+//--------------------------------------------
+/*
+if you want to use the mail system, it's very simple..
+just use the mail provider configuration and put it in the .env file..
+and then make a class (SendContact) and a markdown if you want (template for the email)..
+and the then assign this markdown to a view "emails.contact.send_contact":
+
+      php artisan make:mail SendContact --markdown=emails.contact.send_contact
+
+right what you want in the email markdown (view) and do the action you want in SendContact class
+
+//-------------------------------------------
+//                  End of sEmail
+//--------------------------------------------

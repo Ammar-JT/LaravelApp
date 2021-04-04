@@ -31,11 +31,11 @@ class PostsController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-    
+
     public function index()
-    {   
+    {
         // -----------------------------------
-        //              Eloquent    
+        //              Eloquent
         // -----------------------------------
         //When you use the model to fetch the data from DB, that's called Eloquent:
         //$posts = Post::all();
@@ -48,8 +48,8 @@ class PostsController extends Controller
 
         //to get it order by time desc:
         //$posts = Post::orderBy('created_at','desc')->get();
-        
-        //same but with Pagination: 
+
+        //same but with Pagination:
         $posts = Post::orderBy('created_at','desc')->paginate(6);
         return view('posts.index')->with('posts', $posts);
     }
@@ -81,7 +81,7 @@ class PostsController extends Controller
 
         //Handle File Upload:
         if($request->hasFile('cover_image')){ //$req and hasFile is from laravel, instead of the global variable $_POST['']
-            
+
             //get filename with the extension using laravel:
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
             //get just file name without extension using php only:
@@ -102,7 +102,7 @@ class PostsController extends Controller
         }else{
             $fileNameToStore = 'noimage.jpg';
         }
-        
+
         //create post
         $post = new Post;
         $post->title = $request->input('title');
@@ -159,12 +159,12 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            'cover_image' => 'image|nullable|max:1999' 
+            'cover_image' => 'image|nullable|max:1999'
         ]);
 
         //Handle File Upload:
         if($request->hasFile('cover_image')){ //$req and hasFile is from laravel, instead of $_POST['']
-            
+
             //get filename with the extension using laravel:
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
             //get just file name without extension using php only:
@@ -190,7 +190,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
 
-        //this is if they 
+        //this is if they
         if($request->hasFile('cover_image')){
             if ($post->cover_image != 'noimage.jpg') {
                 Storage::delete('public/cover_images/'.$post->cover_image);
@@ -212,7 +212,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //update post
+        //delete post
         $post = Post::find($id);
         //Here we check for correct user:
         if(auth()->user()->id !== $post->user_id){
@@ -227,6 +227,6 @@ class PostsController extends Controller
         $post->delete();
         return redirect('/posts')->with('success', 'Post Deleted');
 
-    
+
     }
 }
