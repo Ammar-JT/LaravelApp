@@ -66,7 +66,10 @@ Try to make auth from the begining before anything,
 this will install the ui for auth and also vue.js:
     composer require laravel/ui --dev
     php artisan ui vue --auth
-
+//GOT AN ERROR????? TRY THESE:
+    run: composer install
+    run: npm install
+    run: npm run dev
 */
 //-------------------------
 //      End of Authentication
