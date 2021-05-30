@@ -13,14 +13,74 @@
         <!-- we're using { !!$post->body!! } to parse the html code when using ckeditor -->
         {!!$post->body!!}
     </div>
+
+    @if (!Auth::guest() && Auth::user()->id == $post->user_id)
+        <hr>
+        <a class="btn btn-info btn-block mb-2" type="button" data-toggle="modal" data-target="#addImage">اضافة صورة</a>
+    @endif
+    
     <hr>
     <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
     <hr>
-    @if (!Auth::guest() && Auth::user()->id == $post->user_id)
-        <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-secondary">Edit</a>
-        {!!Form::open(['action' => ['App\Http\Controllers\PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
-            {{Form::hidden('_method', 'DELETE')}}
-            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-        {!!Form::close()!!}
-    @endif
+    <div class = "mb-4">
+        @if (!Auth::guest() && Auth::user()->id == $post->user_id)
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-secondary">Edit</a>
+            {!!Form::open(['action' => ['App\Http\Controllers\PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+            {!!Form::close()!!}
+        @endif
+    </div>
+
+
+
+
+
+    <!-- Add Menu Modal -->
+    <div class="modal fade" id="addImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {!! Form::open(['action' => ['App\Http\Controllers\PostsController@addImage', $post->id] , 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                    <div class="modal-header">
+                        <div class="float-right">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div> 
+                        <h5>Add Image</h5>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <p>Image File</p>
+                        <div class="custom-file mb-3">
+                            {{Form::file('image_file', ['class' => 'form-control',
+                            'placeholder' => '',
+                            'class' => 'custom-file-input',
+                            'accept' => "image/*"])}}
+                            <label class="custom-file-label" for="image_file">Only Images</label>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
+                    </div>
+                {!! Form::close() !!}
+
+                
+                
+            </div>
+        </div>
+    </div>
 @endsection
+
+
+
+@section('script')
+<script>
+    $(".custom-file-input").on("change",function(){
+        var fileName= $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+@endsection
+
+

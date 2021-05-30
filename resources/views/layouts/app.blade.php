@@ -56,6 +56,8 @@
             CKEDITOR.replace( 'article-ckeditor' );
         </script>
 
+        @yield('script')
+
         
     </div>
 </body>

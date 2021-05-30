@@ -36,7 +36,11 @@ class Post extends Model
     //You should also add something in the user model, go check it out.
 
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function images(){
+        return $this->hasMany(PostImages::class);
     }
 
 }

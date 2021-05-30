@@ -51,6 +51,9 @@ Route::get('/services', [Controllers\PagesController::class, 'services'])->name(
 
 Route::resource('posts', Controllers\PostsController::class);
 
+Route::post('posts/{id}/addImage', [Controllers\PostsController::class, 'addImage'])->name('post.addImage');
+
+
 
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
@@ -199,3 +202,33 @@ right what you want in the email markdown (view) and do the action you want in S
 //-------------------------------------------
 //                  End of sEmail
 //--------------------------------------------
+
+//=========================================================================================
+
+
+//-------------------------------------------
+//                  DB Relations
+//--------------------------------------------
+/*
+if you want to use the mail system, it's very simple..
+just use the mail provider configuration and put it in the .env file..
+and then make a class (SendContact) and a markdown if you want (template for the email)..
+and the then assign this markdown to a view "emails.contact.send_contact":
+
+      php artisan make:mail SendContact --markdown=emails.contact.send_contact
+
+right what you want in the email markdown (view) and do the action you want in SendContact class
+
+//-------------------------------------------
+//                  End of DB Relations
+//--------------------------------------------
+
+/*
+-All the relationship between tables are done in the models and db tables (migrations)
+    -If you want a 1 to 1 relationship use hasOne() in the model
+    -If you want a 1 to n relationship use hasMany() and belongsTo() in both models
+    -If you want an n to n relationship use belongsToMany() in both models + make a pivot table (in the migration)
+
+-In this project I used 1 to n in 
+
+*/

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 // use DB;
 //Notice we didn't use 'App\Post' cuz in laravel 8 all the models moved to Medels folder:
 use App\Models\Post;
+use App\Models\PostImage;
+
 
 //this one for deleing with the file storage, cuz we need it for deletion:
 use Illuminate\support\Facades\Storage;
@@ -222,10 +224,62 @@ class PostsController extends Controller
         if($post->cover_image != 'noimage.jpg'){
             //delete image
             Storage::delete('public/cover_images/'. $post->cover_image);
+
+            foreach ($post->images as $image) {
+                Storage::delete('public/post_images/'. $image->file_name);
+            }
         }
 
         $post->delete();
         return redirect('/posts')->with('success', 'Post Deleted');
+
+
+    }
+
+    public function addImage(Request $request, $id)
+    {
+        $this->validate($request, [
+            'image_file' => 'image|nullable|max:1999'
+        ]);
+        // post
+        $post = Post::find($id);
+
+        //Here we check for correct user:
+        if(auth()->user()->id !== $post->user_id){
+            return redirect('/posts')->with('error','Unauthorized Page');
+        }
+
+        //Handle File Upload:
+        if($request->hasFile('image_file')){ //$req and hasFile is from laravel, instead of the global variable $_POST['']
+
+            //get filename with the extension using laravel:
+            $filenameWithExt = $request->file('image_file')->getClientOriginalName();
+            //get just file name without extension using php only:
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            //get ext using laravel:
+            $extension = $request->file('image_file')->getClientOriginalExtension();
+            //file to store:
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            //upload image:
+            ///this will actually stored at storage/app/public/cover_images/file.image:
+            $path = $request->file('image_file')->storeAs('public/post_images', $fileNameToStore);
+            ///..you actually wanna have a shortcut for that path in the public folder,
+            ///.. so people can access the image, for that use the following instruction:
+            ///.. $ php artisan storage:link
+
+        }else{
+            return redirect('/posts/' . $post->id )->with('error', 'No image selected');
+        }
+
+        //create post image
+        $postImage = new PostImage;
+        $postImage->post_id = $post->id;
+        $postImage->file_name = $fileNameToStore;
+        $postImage->save();
+
+        return redirect('/posts/' . $post->id )->with('success', 'Image Uploaded');
 
 
     }
