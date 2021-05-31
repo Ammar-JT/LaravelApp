@@ -14,10 +14,28 @@
         {!!$post->body!!}
     </div>
 
-    @if (!Auth::guest() && Auth::user()->id == $post->user_id)
+
+    @if ($post->images)
         <hr>
+    @endif
+
+    @if (!Auth::guest() && Auth::user()->id == $post->user_id)
         <a class="btn btn-info btn-block mb-2" type="button" data-toggle="modal" data-target="#addImage">اضافة صورة</a>
     @endif
+
+    <div class="row">
+        @if ($post->images)
+            @foreach ($post->images as $image)
+                <div class="col-md-2">
+                    <img style="width:100%" src="/storage/post_images/{{$image->file_name}}" alt="">                    
+                </div>
+            @endforeach
+        @endif
+        
+    </div>
+    
+
+    
     
     <hr>
     <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
