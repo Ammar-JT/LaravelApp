@@ -23,7 +23,7 @@
         <a class="btn btn-info btn-block mb-2" type="button" data-toggle="modal" data-target="#addImage">اضافة صورة</a>
     @endif
 
-    <div class="row">
+    <div class="row justify-content-center">
         @if ($post->images)
             @foreach ($post->images as $image)
                 <div class="col-md-2">

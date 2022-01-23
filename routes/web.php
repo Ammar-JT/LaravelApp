@@ -69,10 +69,12 @@ Try to make auth from the begining before anything,
 this will install the ui for auth and also vue.js:
     composer require laravel/ui --dev
     php artisan ui vue --auth
+    npm install
+    npm run dev
 //GOT AN ERROR????? TRY THESE:
-    run: composer install
-    run: npm install
-    run: npm run dev
+    npm update
+    npm run dev
+
 */
 //-------------------------
 //      End of Authentication
@@ -229,6 +231,11 @@ right what you want in the email markdown (view) and do the action you want in S
     -If you want a 1 to n relationship use hasMany() and belongsTo() in both models
     -If you want an n to n relationship use belongsToMany() in both models + make a pivot table (in the migration)
 
--In this project I used 1 to n in 
+-In this project I used 1 to n in
 
 */
+
+
+//-------------------------------------------------------------------------------------------
+//                  to link the private storage to the public: php artisan storage:link
+//-------------------------------------------------------------------------------------------
