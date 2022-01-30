@@ -115,7 +115,7 @@ class PostsController extends Controller
         $post->cover_image = $fileNameToStore;
         $post->save();
 
-        return redirect('/posts')->with('success', 'Post Created');
+        return redirect('/blogboard')->with('success', 'Post Created');
     }
 
     /**
@@ -203,7 +203,7 @@ class PostsController extends Controller
 
         //laravel just understand that this success is the session
         //.. you made in the inc.messages, wallahi I donno how:
-        return redirect('/posts')->with('success', 'Post Updated');
+        return redirect('/blogboard')->with('success', 'Post Updated');
     }
 
     /**
@@ -232,7 +232,7 @@ class PostsController extends Controller
         }
 
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Deleted');
+        return redirect('/blogboard')->with('success', 'Post Deleted');
 
 
     }

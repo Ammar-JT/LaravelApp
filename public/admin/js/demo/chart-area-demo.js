@@ -30,23 +30,29 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Earnings",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      label: "Sales",
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#2e59d9",
+      borderColor: "#4e73df",
+      data: [25000, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+    },
+    {
+      label: "Cash",
+      backgroundColor: "#1cc88a",
+      hoverBackgroundColor: "#169969",
+      borderColor: "#1cc88a",
+      data: [20000, 7000, 2700, 12000, 3000, 11000, 9000, 20000, 8000, 14000, 19000, 21000],
+    },
+    {
+      label: "Credit",
+      backgroundColor: "#36b9cc",
+      hoverBackgroundColor: "#2d98a8",
+      borderColor: "#36b9cc",
+      data: [5000, 3000, 2300, 3000, 7000, 9000, 6000, 5000, 12000, 16000, 6000, 19000],
     }],
   },
   options: {

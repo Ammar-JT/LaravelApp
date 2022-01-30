@@ -46,7 +46,11 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item
+                @if(Route::is('dashboard'))
+                    active
+                @endif
+            ">
                 <a class="nav-link" href="/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -56,10 +60,14 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <li class="nav-item
+                @if(Route::is('blogboard') )
+                    active
+                @endif
+            ">
                 <a class="nav-link" href="/blogboard">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Blog</span></a>
+                    <i class="fas fa-pen-square"></i>
+                    <span>Blogs</span></a>
             </li>
 
             <!-- Divider -->
@@ -292,7 +300,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; LaravelApp 2022</span>
                     </div>
                 </div>
             </footer>

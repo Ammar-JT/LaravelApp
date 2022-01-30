@@ -13,6 +13,8 @@
 @section('content')
     <div class="container">
         <h1>Create Post</h1>
+        @include('inc.messages')
+
         {!! Form::open(['action' => ['App\Http\Controllers\PostsController@update', $post->id] , 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group">
                 {{Form::label('title', 'Title')}}
