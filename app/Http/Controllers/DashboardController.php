@@ -37,7 +37,17 @@ class DashboardController extends Controller
                 
         ///NOTICE: the $user->posts is a function you built in User.php model, which make the
         ///.. relationship between User and Post one To many:
-        return view('dashboard')->with('posts', $user->posts);
+        return view('dashboard');
+    }
+
+    public function blogboard()
+    {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+                
+        ///NOTICE: the $user->posts is a function you built in User.php model, which make the
+        ///.. relationship between User and Post one To many:
+        return view('blogboard')->with('posts', $user->posts);
     }
     
 }

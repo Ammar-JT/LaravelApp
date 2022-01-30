@@ -57,6 +57,7 @@ Route::post('posts/{id}/addImage', [Controllers\PostsController::class, 'addImag
 
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/blogboard', [App\Http\Controllers\DashboardController::class, 'blogboard'])->name('blogboard');
 
 
 
